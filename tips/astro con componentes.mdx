@@ -1,0 +1,88 @@
+---
+title: "Top Tips for Improving Your Astro Projects"
+date: "2024-11-14"
+tags: ["tips", "astro"]
+---
+
+# Cómo Integrar Componentes Externos en Astro
+
+## Introducción
+
+Astro introdujo y popularizó una arquitectura frontend llamada "Islands" que mejora el rendimiento del frontend al evitar los patrones monolíticos de JavaScript y eliminar todo el JavaScript innecesario de la página automáticamente. Los desarrolladores pueden seguir utilizando sus componentes y frameworks UI favoritos con Astro y, aún así, obtener estos beneficios.
+
+### Un Poco de Historia
+
+El término “componente isla” fue acuñado por la arquitecta frontend de Etsy, Katie Sylor-Miller, en 2019. Esta idea fue expandida y documentada en un post de Jason Miller, creador de Preact, el 11 de agosto de 2020.
+
+La idea general de la arquitectura "Islands" es sencillamente: renderizar las páginas HTML en el servidor e inyectar marcadores de posición o slots alrededor de regiones altamente dinámicas que luego pueden ser "hidratadas" en el cliente en pequeños widgets autónomos, reutilizando su HTML renderizado en el servidor.
+
+### ¿Qué es una Isla?
+
+En Astro, una "isla" se refiere a cualquier componente interactivo de la UI en la página. Piensa en una isla como un widget interactivo flotando en un mar de HTML estático renderizado en el servidor. Una isla siempre se ejecuta de manera independiente de otras islas en la página, y varias islas pueden existir en una misma página. Las islas pueden compartir estado y comunicarse entre sí, aunque se ejecuten en contextos diferentes.
+
+### Beneficios de las Islas
+
+El beneficio más obvio de construir con Astro Islands es el rendimiento: la mayoría de tu sitio web se convierte en HTML estático rápido, y solo se carga JavaScript para los componentes individuales que lo necesitan. El JavaScript es uno de los recursos más lentos de cargar por byte, por lo que cada byte cuenta.
+
+Otro beneficio es la carga paralela. Las islas de baja prioridad no bloquean la carga de las islas de alta prioridad. Por ejemplo, si tienes un "carrusel de imágenes" como isla de baja prioridad, no necesitará bloquear la isla del "encabezado" que tiene mayor prioridad.
+
+### Directivas del Cliente
+
+Las directivas de cliente controlan cómo se hidratan los componentes de framework en la página. Por defecto, un componente de framework no se hidrata en el cliente. Si no se proporciona la directiva `client:*`, su HTML se representa en la página sin JavaScript.
+
+- **client:load**  
+  Prioridad: Alta  
+  Carga e hidrata el JavaScript del componente inmediatamente al cargar la página.
+
+  ```
+  <BuyButton client:load />
+  ```
+
+- **client:idle**  
+  Prioridad: Media  
+  Carga e hidrata el componente una vez que la página haya terminado con su carga inicial y se haya activado el evento `requestIdleCallback`.
+
+  ```
+  <ShowHideButton client:idle />
+  ```
+
+- **client:visible**  
+  Prioridad: Baja  
+  Carga e hidrata el JavaScript del componente una vez que haya ingresado al viewport del usuario.
+
+  ```
+  <HeavyImageCarousel client:visible />
+  ```
+
+- **client:media**  
+  Prioridad: Baja  
+  Carga e hidrata el componente JavaScript cuando se cumple una media query de CSS.
+
+  ```
+  <SidebarToggle client:media="(max-width: 50em)" />
+  ```
+
+- **client:only**  
+  Impide la renderización del servidor y solo renderiza el componente en el cliente. 
+
+  ```
+  <SomeReactComponent client:only="react" />
+  ```
+
+### Creando una Isla
+
+Para convertir un componente estático en una isla interactiva, simplemente agrega la directiva `client:*`. Por ejemplo:
+
+```
+<MyReactComponent client:load />
+```
+
+Astro construirá y agrupará automáticamente el JavaScript del lado del cliente para un rendimiento optimizado, Astro es compatible con todos los principales frameworks de UI. Puedes integrar tus componentes existentes y aprovechar el rendimiento optimizado de construcción de clientes de Astro.
+
+### Integra tu framework favorito
+
+- **React**
+- **Vue**
+- **Preact**
+- **Svelte**
+- **Solid**

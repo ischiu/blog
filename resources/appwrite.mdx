@@ -1,0 +1,105 @@
+---
+title: "Appwrite el mejor backend para tus proyectos Web"
+date: "2024-11-14"
+tags: ["open-source", "backend"]
+---
+
+# Appwrite: Plataforma Integral para el Desarrollo de Aplicaciones
+
+Appwrite es una solución completa para el desarrollo de aplicaciones Web, Móviles y Flutter. Diseñada en colaboración con la comunidad de código abierto, Appwrite simplifica la creación de servidores backend seguros y funcionales mediante una arquitectura basada en microservicios Docker. 
+
+![bun landing](https://raw.githubusercontent.com/appwrite/appwrite/main/public/images/banner.png)
+
+## Características Principales
+
+### Lista Desordenada
+
+- **Autenticación**: Soporte para múltiples métodos de inicio de sesión con OAuth.
+- **Bases de Datos**: Almacenamiento y consulta de datos de usuarios y equipos.
+- **Funciones**: Personalización y extensión de la funcionalidad del servidor.
+- **Mensajería**: Envío de correos electrónicos, SMS y notificaciones push.
+- **Almacenamiento**: Gestión de imágenes, videos, documentos y archivos.
+- **Tiempo Real**: Respuesta inmediata a eventos del servidor.
+
+### Lista Ordenada
+
+1. **Instalación Local**:
+    - Ejecute Appwrite utilizando `docker-compose` en su máquina local.
+2. **Instalación en la Nube**:
+    - Configure Appwrite con opciones de un solo clic en proveedores como DigitalOcean o AWS.
+3. **Actualización de Versiones**:
+    - Utilice la herramienta de migración para actualizar de versiones anteriores.
+
+#### Cita Destacada
+
+"Appwrite abstrae la complejidad y repetitividad necesarias para construir un backend moderno, permitiéndote desarrollar aplicaciones seguras más rápido."
+
+##### Tablas
+
+| Servicio         | Descripción                                   | Uso Clave                    |
+|------------------|-----------------------------------------------|------------------------------|
+| Autenticación    | Métodos de inicio de sesión OAuth            | Seguridad                    |
+| Bases de Datos   | Gestión de datos de usuarios y aplicaciones  | Almacenamiento estructurado  |
+| Almacenamiento   | Manejo de archivos                           | Gestión de archivos          |
+| Tiempo Real      | Notificaciones inmediatas                    | Interactividad               |
+
+## Instalación
+
+Appwrite está diseñado para ejecutarse en un entorno containerizado. Configurar tu servidor es tan sencillo como ejecutar un único comando en tu terminal. Puedes instalar Appwrite localmente usando `docker-compose` o emplear herramientas de orquestación como Kubernetes, Docker Swarm o Rancher.
+
+### Comandos de Instalación
+
+#### Unix
+
+```
+
+docker run -it --rm \
+    --volume /var/run/docker.sock:/var/run/docker.sock \
+    --volume "$(pwd)"/appwrite:/usr/src/code/appwrite:rw \
+    --entrypoint="install" \
+    appwrite/appwrite:1.6.0
+
+```
+
+#### Windows (CMD)
+
+```
+
+docker run -it --rm ^
+    --volume //var/run/docker.sock:/var/run/docker.sock ^
+    --volume "%cd%"/appwrite:/usr/src/code/appwrite:rw ^
+    --entrypoint="install" ^
+    appwrite/appwrite:1.6.0
+
+```
+
+#### Windows (PowerShell)
+
+```
+
+docker run -it --rm `
+    --volume /var/run/docker.sock:/var/run/docker.sock `
+    --volume ${pwd}/appwrite:/usr/src/code/appwrite:rw `
+    --entrypoint="install" `
+    appwrite/appwrite:1.6.0
+
+```
+
+
+## Código de Ejemplo
+
+*Docker Compose para Appwrite en Unix*
+
+```
+
+docker run -it --rm \
+    --volume /var/run/docker.sock:/var/run/docker.sock \
+    --volume "$(pwd)"/appwrite:/usr/src/code/appwrite:rw \
+    --entrypoint="install" \
+    appwrite/appwrite:1.6.0
+
+```
+
+
+
+Appwrite es una herramienta poderosa para desarrolladores que buscan simplificar la gestión del backend. Su soporte para múltiples APIs (REST, WebSocket, GraphQL) y su diseño optimizado para escalabilidad la convierten en una opción ideal para aplicaciones modernas. Para más detalles, consulta su [documentación oficial](https://appwrite.io/docs).

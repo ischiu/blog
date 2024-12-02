@@ -4,51 +4,144 @@ date: "2024-11-30"
 tags: ["versiones", "astro"]
 ---
 
-# Guía Completa de Componentes
+### Lanzamiento de la beta de Astro 5.0  
+Por Erika
 
-Este documento incluye ejemplos de todos los componentes sugeridos para MDX.
+La primera beta de Astro 5.0 ya está disponible. Esta versión incluye el **Astro Content Layer**, que se ha estabilizado como la última iteración para la gestión de contenido en proyectos de Astro, y las **Server Islands**, una nueva forma de combinar contenido estático y personalizado en un sitio web para aprovechar lo mejor de ambos mundos.
 
+A continuación, te explicamos más sobre las nuevas características y mejoras que trae la beta de Astro 5.0.
 
-## Objetos
+### Principales novedades de la versión:
+- Estable: **Content Layer**
+- Estable: **Server Islands**
+- Modos de salida estática e híbrida combinados
+- Estable: **astro:env**
 
-### Lista Desordenada
+Si ya tienes un proyecto en marcha, puedes actualizarlo utilizando la herramienta automática `@astrojs/upgrade` desde la CLI. También puedes realizar la actualización manualmente ejecutando el comando de instalación de tu gestor de paquetes, especificando la etiqueta beta.
 
-- **Elemento 1**: Ejemplo de una lista desordenada.
-- **Elemento 2**: Otro ítem de lista.
-- **Elemento 3**: Un tercer ítem.
-
-### Lista Ordenada
-
-1. Primer paso de un proceso.
-2. Segundo paso de un proceso.
-3. Tercer paso de un proceso.
-
-#### Cita Destacada
-
-"Este es un ejemplo de un bloque de cita destacado, ideal para enfatizar mensajes importantes o citas de terceros." - [autor](https://shiki.style)
-
-##### Tablas
-
-| Columna 1 | Columna 2 | Columna 3 |
-|-----------|-----------|-----------|
-| Dato 1    | Dato 2    | Dato 3    |
-| Dato A    | Dato B    | Dato C    |
-
-
-
-## Código de Ejemplo
-
-*astro*
+#### Recomendado:
 
 ```
----
-const isExample = true;
----
-<h1>Ejemplo de código en Astro</h1>
-<p>Este es un ejemplo de cómo estructurar código dentro de Astro.</p>
+
+npx @astrojs/upgrade beta
+
+```
+
+#### Manual:
+
+
+```
+
+npm install astro@beta
+pnpm install astro@beta
+yarn add astro@beta
+
+```
+
+Para iniciar un nuevo proyecto con la beta 5.0, ejecuta el comando `create astro` en tu gestor de paquetes:
+
+```
+npm create astro@latest -- --ref next
 ```
 
 
+### Estable: **Content Layer**
 
-![bun landing](/img/apis.jpg)
+Astro 5.0 introduce el **Astro Content Layer**, una nueva forma de gestionar el contenido en los proyectos de Astro. Esta capa es flexible y extensible, permitiendo interactuar con el contenido de manera unificada, a través de una API segura y con tipado, sin importar la fuente de este contenido, gracias a los potentes cargadores.
+
+A medida que tu sitio web crece, tener el contenido almacenado en archivos Markdown dentro de un repositorio Git puede volverse poco práctico. Quizás quieras emplear un CMS o utilizar una API REST para algunas secciones, o gestionar imágenes optimizadas a través de un sistema de gestión de activos como Cloudinary. Todo esto puede volverse difícil de manejar, ya que requiere gestionar diversas APIs y estrategias de obtención de datos.
+
+El **Content Layer** está basado en los cargadores, funciones intercambiables que obtienen y transforman los datos desde cualquier fuente, convirtiéndolos en un formato unificado y seguro en cuanto a tipos. Esto te permite usar estos datos de manera confiable en tu proyecto Astro.
+
+```
+
+// src/content/config.ts
+import { defineCollection } from "astro:content";
+import { notionLoader } from "notion-astro-loader";
+
+const database = defineCollection({
+  loader: notionLoader({ /* ... */ })
+});
+
+export const collections = {
+  database,
+}
+
+```
+
+Este es solo un vistazo de lo que el Content Layer puede hacer por tu proyecto. Mantente al tanto, ya que esta semana se publicará más información sobre esta característica. También puedes consultar la guía sobre las nuevas colecciones de contenido en la documentación de la beta 5.0 para empezar.
+
+---
+
+### Estable: **Server Islands**
+
+Las **Server Islands** son una nueva funcionalidad de Astro 5 que permite diferir el renderizado de contenido dinámico hasta después de la carga inicial de la página. Esto permite servir páginas estáticas con contenido personalizado que se inserta posteriormente, combinando la velocidad de las páginas estáticas con la personalización de contenido dinámico.
+
+Este sistema se basa en la arquitectura de islas existente en Astro. Definir una Server Island es tan sencillo como definir una isla de cliente, pero usando el directivo `server:defer` en lugar de `client:load`:
+
+```
+
+<UserButton server:defer />
+
+```
+
+Esto indica a Astro que omita el renderizado de este componente en la respuesta inicial y lo "diferido" para más tarde. De esta forma, la página estática se puede almacenar en caché detrás de una CDN, mientras que un pequeño script en línea reemplaza la Server Island con el contenido dinámico una vez cargado.
+
+Este tipo de funcionalidad es especialmente útil en sitios web centrados en contenido que combinan contenido dinámico y estático en la misma página. Por ejemplo, en un sitio de comercio electrónico, podrías diferir el renderizado de recomendaciones de productos hasta después de la carga inicial, mejorando así el tiempo de carga sin perder la personalización.
+
+---
+
+### Modos combinados de salida estática e híbrida
+
+Con Astro 5, es más fácil que nunca crear sitios web que combinen páginas estáticas, eficientes y en caché con páginas dinámicas que se renderizan bajo demanda. El nuevo modo de salida `static`, que es el predeterminado, ahora permite renderizar rutas individuales en tiempo de ejecución en el servidor simplemente agregando un adaptador, sin necesidad de configuración adicional.
+
+Este modo funciona igual que el anterior modo híbrido: por defecto, todas las páginas se generan de forma estática a menos que se opte por no prerenderizarlas:
+
+```
+
+export const prerender = false; // Renderiza en tiempo de solicitud
+
+```
+
+Si la mayoría de tus páginas deben renderizarse bajo demanda, puedes seguir utilizando el modo `output: 'server'` en tu configuración de Astro para hacer que todas se rendericen en el servidor por defecto.
+
+---
+
+### Estable: **astro:env**
+
+El manejo de variables de entorno se ha vuelto complicado a medida que los proyectos crecen. Astro 5.0 introduce `astro:env`, un módulo integrado que proporciona una manera segura y tipada de definir y acceder a variables de entorno.
+
+Primero, define las variables de entorno en tu configuración de Astro, utilizando una sintaxis de esquema familiar:
+
+```
+
+import { defineConfig, envField } from "astro/config";
+
+export default defineConfig({
+  env: {
+    schema: {
+      CLIENT_API_URL: envField.string({ context: "client", access: "public" }),
+      SERVER_API_URL: envField.string({ context: "server", access: "public" }),
+      API_SECRET: envField.string({ context: "server", access: "secret" }),
+    }
+  }
+})
+
+```
+
+Luego, puedes acceder a estas variables de entorno dentro de tu proyecto Astro usando el módulo `astro:env`:
+
+```
+
+import { SERVER_API_URL, API_SECRET, PORT } from "astro:env/server";
+
+const data = await fetch(`${SERVER_API_URL}/api`, {
+  headers: {
+    Authorization: `Bearer ${API_SECRET}`
+  }
+})
+
+```
+
+Para más detalles sobre cómo manejar las variables de entorno en Astro, consulta nuestra guía sobre variables de entorno seguras en la documentación de la beta 5.0.
 
