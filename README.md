@@ -41,15 +41,15 @@ Contenido del post en MDX...
 
 ## 📄 Licencia
 
-Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
+Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](https://ischiu.com/docs/mit) para más detalles.
 
 ## 🤝 Conecta Conmigo
 
-[🌐 Portfolio](https://tusitio.com) • **Mi Sitio Personal**
+[🌐 Portfolio](https://ischiu.com/portfolio) • **Mi Sitio Personal**
 
 
 [👔 LinkedIn](https://linkedin.com/in/ischiu) • **Perfil Profesional**
 
 [🎮 Discord](https://discordapp.com/users/396798805263253506) • **Comunidad & Chat**
 
-[📧 Email](mailto:ischiuxd@proton.me) • **Contacto Directo**
+[📧 Email](mailto:Diego@ischiu.dev) • **Contacto Directo**
