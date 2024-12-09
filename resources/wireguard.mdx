@@ -1,0 +1,59 @@
+---
+title: "WireGuard: La Revolución en VPNs"
+date: "2024-12-09"
+tags: ["VPN", "seguridad", "redes"]
+---
+
+# WireGuard: La Revolución en VPNs
+
+WireGuard® es una VPN extremadamente simple, rápida y moderna que utiliza criptografía de última generación. Diseñada para ser más rápida, sencilla, eficiente y útil que IPsec, WireGuard evita los dolores de cabeza asociados con otras soluciones VPN. Su objetivo es ser considerablemente más performante que OpenVPN, convirtiéndose en una de las soluciones VPN más seguras y fáciles de usar en la industria.
+
+![WireGuard Logo](https://www.wireguard.com/img/wireguard.svg)
+
+## Características Principales
+
+### Fácil de Usar
+
+WireGuard se esfuerza por ser tan fácil de configurar y desplegar como SSH. Una conexión VPN se establece simplemente intercambiando claves públicas, similar a cómo se intercambian claves SSH. Todo lo demás es manejado de manera transparente por WireGuard, sin necesidad de gestionar conexiones, estados, daemons o preocuparse por lo que ocurre bajo el capó.
+
+### Seguridad Criptográfica
+
+WireGuard utiliza criptografía de última generación, como el Noise protocol framework, Curve25519, ChaCha20, Poly1305, BLAKE2, SipHash24, HKDF, y construcciones seguras confiables. Ha sido revisado por criptógrafos y hace elecciones conservadoras y razonables en términos de seguridad.
+
+### Superficie de Ataque Mínima
+
+Diseñado con la facilidad de implementación y simplicidad en mente, WireGuard puede ser implementado en muy pocas líneas de código y es fácilmente auditable para vulnerabilidades de seguridad. A diferencia de soluciones como *Swan/IPsec o OpenVPN/OpenSSL, cuyas enormes bases de código son difíciles de auditar incluso para grandes equipos de expertos en seguridad, WireGuard puede ser revisado de manera exhaustiva por individuos.
+
+### Alto Rendimiento
+
+La combinación de primitivas criptográficas de alta velocidad y el hecho de que WireGuard reside dentro del kernel de Linux significa que la red segura puede ser extremadamente rápida. Es adecuado tanto para pequeños dispositivos embebidos como smartphones, como para routers de backbone completamente cargados.
+
+### Bien Definido y Minuciosamente Considerado
+
+WireGuard es el resultado de un proceso académico largo y bien considerado, que culminó en un whitepaper técnico que define claramente el protocolo y las consideraciones intensas que se hicieron en cada decisión.
+
+## Visión General Conceptual
+
+WireGuard encapsula de manera segura paquetes IP sobre UDP. Añades una interfaz WireGuard, la configuras con tu clave privada y las claves públicas de tus peers, y luego envías paquetes a través de ella. Todos los problemas de distribución de claves y configuraciones empujadas están fuera del alcance de WireGuard; estos problemas son mejor dejados para otras capas, evitando así la complejidad de IKE o OpenVPN.
+
+### Interfaz de Red Simple
+
+WireGuard funciona añadiendo una interfaz de red (o múltiples), como eth0 o wlan0, llamada wg0 (o wg1, wg2, wg3, etc.). Esta interfaz de red puede ser configurada normalmente usando ifconfig(8) o ip-address(8), con rutas añadidas y eliminadas usando route(8) o ip-route(8), y así sucesivamente con todas las utilidades de red ordinarias. Los aspectos específicos de WireGuard de la interfaz se configuran usando la herramienta wg(8). Esta interfaz actúa como una interfaz de túnel.
+
+### Enrutamiento de Cryptokey
+
+En el corazón de WireGuard está el concepto de Cryptokey Routing, que asocia claves públicas con una lista de direcciones IP de túnel permitidas dentro del túnel. Cada interfaz de red tiene una clave privada y una lista de peers. Cada peer tiene una clave pública. Las claves públicas son cortas y simples, y son usadas por los peers para autenticarse mutuamente.
+
+### Roaming Integrado
+
+WireGuard soporta roaming completo en ambos extremos. La configuración del cliente contiene un endpoint inicial de su único peer (el servidor), para que sepa a dónde enviar datos encriptados antes de recibir datos encriptados. La configuración del servidor no tiene endpoints iniciales de sus peers (los clientes). Esto es porque el servidor descubre el endpoint de sus peers examinando de dónde provienen los datos autenticados correctamente.
+
+### Listo para Contenedores
+
+WireGuard envía y recibe paquetes encriptados usando el namespace de red en el que se creó originalmente la interfaz WireGuard. Esto significa que puedes crear la interfaz WireGuard en tu namespace de red principal, que tiene acceso a Internet, y luego moverla a un namespace de red perteneciente a un contenedor Docker como la única interfaz de ese contenedor. Esto asegura que la única manera en que el contenedor puede acceder a la red es a través de un túnel encriptado seguro de WireGuard.
+
+## Instalación
+
+Para instalar WireGuard, sigue las instrucciones detalladas en el [sitio oficial de WireGuard](https://www.wireguard.com/install/).
+
+WireGuard representa un avance significativo en la tecnología VPN, ofreciendo una solución que es a la vez segura, eficiente y fácil de usar. Su enfoque en la simplicidad y la seguridad lo convierte en una opción atractiva para cualquier persona interesada en proteger su privacidad y seguridad en línea. Si estás buscando una VPN que realmente cumpla con tus expectativas, WireGuard es una opción que definitivamente debes considerar.

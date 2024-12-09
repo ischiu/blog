@@ -1,0 +1,84 @@
+---
+title: "ERPNext: Gestión Empresarial en un Solo Lugar"
+date: "2024-12-09"
+tags: ["ERP", "open-source", "business-management"]
+---
+
+# ERPNext: Solución Integral para Negocios
+
+ERPNext es una herramienta de gestión empresarial de extremo a extremo diseñada para ayudar a las empresas a centralizar su información y tomar decisiones basadas en datos. Ideal para PYMEs, ERPNext aporta fortaleza, transparencia y control a cada aspecto del negocio.
+
+![erpnext](https://opsxl.myerp.host/files/e2.webp)
+
+## Características Principales
+
+### Lista Desordenada
+
+- **Facturación y Pagos**: Mantén registro detallado de tus transacciones.
+- **Inventario**: Consulta la disponibilidad de productos en tiempo real.
+- **Indicadores Clave (KPIs)**: Identifica y realiza seguimiento de métricas importantes.
+- **Gestión de Tareas**: Asigna, monitorea y controla el progreso de tareas.
+- **Nómina y Presupuestos**: Automatiza la gestión de nómina y el seguimiento de gastos.
+- **Base de Datos Centralizada**: Almacena contactos de clientes, proveedores y más.
+- **Página Web Integrada**: Publica y administra tu página web desde una sola plataforma.
+
+### Lista Ordenada
+
+1. **Control Financiero**:
+    - Registra pagos y genera facturas fácilmente.
+2. **Optimización de Recursos**:
+    - Determina costos de ventas basados en insumos y esfuerzo.
+3. **Gestión Operativa**:
+    - Monitorea el calendario de mantenimiento y tareas críticas.
+
+#### Cita Destacada
+
+"ERPNext centraliza la información para que las empresas tomen decisiones informadas y competitivas."
+
+##### Tablas
+
+| Función               | Descripción                      | Beneficio                    |
+|-----------------------|----------------------------------|------------------------------|
+| Facturación           | Registro de pagos y facturas     | Gestión financiera eficiente |
+| Gestión de KPIs       | Seguimiento de indicadores clave | Mejora continua              |
+| Gestión de Inventario | Control de existencias           | Optimización de recursos     |
+| Nómina y Tareas       | Administración automatizada      | Incremento en productividad  |
+
+## Instalación
+
+ERPNext puede instalarse mediante Docker, una opción recomendada por su eficiencia y simplicidad. Asegúrate de tener configurado Docker, docker-compose y git en tu máquina antes de proceder.
+
+### Comandos de Instalación
+
+#### Probar en Sandbox
+
+Accede a un entorno preconfigurado desde tu navegador. Haz clic en el botón "Try in PWD" en la documentación oficial.
+
+#### Ambiente de Desarrollo
+
+1. Clona el repositorio:
+    ```
+    git clone https://github.com/frappe/frappe_docker
+    cd frappe_docker
+    ```
+
+2. Ejecuta el siguiente comando para levantar los servicios:
+    ```
+    docker compose -f pwd.yml up -d
+    ```
+
+3. Configuración para ARM64:
+    ```
+    docker buildx bake --no-cache --set *.platform=linux/arm64
+    ```
+
+4. Ajusta las configuraciones y vuelve a ejecutar:
+    ```
+    docker compose -f pwd.yml up -d
+    ```
+
+### Pasos Finales
+
+Espera aproximadamente 5 minutos mientras se crea el sitio o revisa los logs del contenedor `create-site`. Luego, accede al navegador en el puerto 8080 con las credenciales predeterminadas (usuario: `Administrator`, contraseña: `admin`).
+
+ERPNext es una solución poderosa y versátil que ayuda a las empresas a mantenerse competitivas en el entorno actual. Descubre más en su [repositorio oficial](https://github.com/frappe/erpnext).
