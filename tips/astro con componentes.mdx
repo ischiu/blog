@@ -1,6 +1,6 @@
 ---
 title: "Cómo Integrar Componentes Externos en Astro"
-date: "2024-11-30"
+date: "2024-12-11"
 tags: ["frameworks", "astro"]
 ---
 
@@ -30,7 +30,7 @@ Otro beneficio es la carga paralela. Las islas de baja prioridad no bloquean la 
 
 Las directivas de cliente controlan cómo se hidratan los componentes de framework en la página. Por defecto, un componente de framework no se hidrata en el cliente. Si no se proporciona la directiva `client:*`, su HTML se representa en la página sin JavaScript.
 
-- **client:load**  
+1. **client:load**  
   Prioridad: Alta  
   Carga e hidrata el JavaScript del componente inmediatamente al cargar la página.
 
@@ -38,7 +38,7 @@ Las directivas de cliente controlan cómo se hidratan los componentes de framewo
   <BuyButton client:load />
   ```
 
-- **client:idle**  
+2. **client:idle**  
   Prioridad: Media  
   Carga e hidrata el componente una vez que la página haya terminado con su carga inicial y se haya activado el evento `requestIdleCallback`.
 
@@ -46,7 +46,7 @@ Las directivas de cliente controlan cómo se hidratan los componentes de framewo
   <ShowHideButton client:idle />
   ```
 
-- **client:visible**  
+3. **client:visible**  
   Prioridad: Baja  
   Carga e hidrata el JavaScript del componente una vez que haya ingresado al viewport del usuario.
 
@@ -54,7 +54,7 @@ Las directivas de cliente controlan cómo se hidratan los componentes de framewo
   <HeavyImageCarousel client:visible />
   ```
 
-- **client:media**  
+4. **client:media**  
   Prioridad: Baja  
   Carga e hidrata el componente JavaScript cuando se cumple una media query de CSS.
 
@@ -62,7 +62,7 @@ Las directivas de cliente controlan cómo se hidratan los componentes de framewo
   <SidebarToggle client:media="(max-width: 50em)" />
   ```
 
-- **client:only**  
+5. **client:only**  
   Impide la renderización del servidor y solo renderiza el componente en el cliente. 
 
   ```

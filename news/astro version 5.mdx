@@ -1,6 +1,6 @@
 ---
 title: "Astro V. 5 el futuro del Desarrollo Web"
-date: "2024-11-30"
+date: "2024-12-11"
 tags: ["versiones", "astro"]
 ---
 
@@ -29,11 +29,9 @@ npx @astrojs/upgrade beta
 
 
 ```
-
 npm install astro@beta
 pnpm install astro@beta
 yarn add astro@beta
-
 ```
 
 Para iniciar un nuevo proyecto con la beta 5.0, ejecuta el comando `create astro` en tu gestor de paquetes:
@@ -52,7 +50,6 @@ A medida que tu sitio web crece, tener el contenido almacenado en archivos Markd
 El **Content Layer** está basado en los cargadores, funciones intercambiables que obtienen y transforman los datos desde cualquier fuente, convirtiéndolos en un formato unificado y seguro en cuanto a tipos. Esto te permite usar estos datos de manera confiable en tu proyecto Astro.
 
 ```
-
 // src/content/config.ts
 import { defineCollection } from "astro:content";
 import { notionLoader } from "notion-astro-loader";
@@ -64,12 +61,10 @@ const database = defineCollection({
 export const collections = {
   database,
 }
-
 ```
 
 Este es solo un vistazo de lo que el Content Layer puede hacer por tu proyecto. Mantente al tanto, ya que esta semana se publicará más información sobre esta característica. También puedes consultar la guía sobre las nuevas colecciones de contenido en la documentación de la beta 5.0 para empezar.
 
----
 
 ### Estable: **Server Islands**
 
@@ -78,16 +73,14 @@ Las **Server Islands** son una nueva funcionalidad de Astro 5 que permite diferi
 Este sistema se basa en la arquitectura de islas existente en Astro. Definir una Server Island es tan sencillo como definir una isla de cliente, pero usando el directivo `server:defer` en lugar de `client:load`:
 
 ```
-
 <UserButton server:defer />
-
 ```
 
 Esto indica a Astro que omita el renderizado de este componente en la respuesta inicial y lo "diferido" para más tarde. De esta forma, la página estática se puede almacenar en caché detrás de una CDN, mientras que un pequeño script en línea reemplaza la Server Island con el contenido dinámico una vez cargado.
 
 Este tipo de funcionalidad es especialmente útil en sitios web centrados en contenido que combinan contenido dinámico y estático en la misma página. Por ejemplo, en un sitio de comercio electrónico, podrías diferir el renderizado de recomendaciones de productos hasta después de la carga inicial, mejorando así el tiempo de carga sin perder la personalización.
 
----
+
 
 ### Modos combinados de salida estática e híbrida
 
@@ -96,14 +89,11 @@ Con Astro 5, es más fácil que nunca crear sitios web que combinen páginas est
 Este modo funciona igual que el anterior modo híbrido: por defecto, todas las páginas se generan de forma estática a menos que se opte por no prerenderizarlas:
 
 ```
-
 export const prerender = false; // Renderiza en tiempo de solicitud
-
 ```
 
 Si la mayoría de tus páginas deben renderizarse bajo demanda, puedes seguir utilizando el modo `output: 'server'` en tu configuración de Astro para hacer que todas se rendericen en el servidor por defecto.
 
----
 
 ### Estable: **astro:env**
 
@@ -112,7 +102,6 @@ El manejo de variables de entorno se ha vuelto complicado a medida que los proye
 Primero, define las variables de entorno en tu configuración de Astro, utilizando una sintaxis de esquema familiar:
 
 ```
-
 import { defineConfig, envField } from "astro/config";
 
 export default defineConfig({
@@ -124,13 +113,11 @@ export default defineConfig({
     }
   }
 })
-
 ```
 
 Luego, puedes acceder a estas variables de entorno dentro de tu proyecto Astro usando el módulo `astro:env`:
 
 ```
-
 import { SERVER_API_URL, API_SECRET, PORT } from "astro:env/server";
 
 const data = await fetch(`${SERVER_API_URL}/api`, {
@@ -138,7 +125,6 @@ const data = await fetch(`${SERVER_API_URL}/api`, {
     Authorization: `Bearer ${API_SECRET}`
   }
 })
-
 ```
 
 Para más detalles sobre cómo manejar las variables de entorno en Astro, consulta nuestra guía sobre variables de entorno seguras en la documentación de la beta 5.0.

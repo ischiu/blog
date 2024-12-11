@@ -1,6 +1,6 @@
 ---
 title: "Appwrite el mejor backend para tus proyectos Web"
-date: "2024-11-30"
+date: "2024-12-11"
 tags: ["open-source", "backend"]
 ---
 
@@ -52,37 +52,31 @@ Appwrite está diseñado para ejecutarse en un entorno containerizado. Configura
 #### Unix
 
 ```
-
 docker run -it --rm \
     --volume /var/run/docker.sock:/var/run/docker.sock \
     --volume "$(pwd)"/appwrite:/usr/src/code/appwrite:rw \
     --entrypoint="install" \
     appwrite/appwrite:1.6.0
-
 ```
 
 #### Windows (CMD)
 
 ```
-
 docker run -it --rm ^
     --volume //var/run/docker.sock:/var/run/docker.sock ^
     --volume "%cd%"/appwrite:/usr/src/code/appwrite:rw ^
     --entrypoint="install" ^
     appwrite/appwrite:1.6.0
-
 ```
 
 #### Windows (PowerShell)
 
 ```
-
 docker run -it --rm `
     --volume /var/run/docker.sock:/var/run/docker.sock `
     --volume ${pwd}/appwrite:/usr/src/code/appwrite:rw `
     --entrypoint="install" `
     appwrite/appwrite:1.6.0
-
 ```
 
 
@@ -91,13 +85,11 @@ docker run -it --rm `
 *Docker Compose para Appwrite en Unix*
 
 ```
-
 docker run -it --rm \
     --volume /var/run/docker.sock:/var/run/docker.sock \
     --volume "$(pwd)"/appwrite:/usr/src/code/appwrite:rw \
     --entrypoint="install" \
     appwrite/appwrite:1.6.0
-
 ```
 
 
